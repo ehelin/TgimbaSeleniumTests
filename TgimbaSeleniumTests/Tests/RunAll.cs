@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using TgimbaSeleniumTests.Tests.Chrome;
-using TgimbaSeleniumTests.Tests.Firefox;
-using TgimbaSeleniumTests.Tests.InternetExplorer;
-using TgimbaSeleniumTests.Tests;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TgimbaSeleniumTests.Tests
 {
