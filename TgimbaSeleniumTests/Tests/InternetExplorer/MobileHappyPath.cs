@@ -6,10 +6,6 @@ namespace TgimbaSeleniumTests.Tests.InternetExplorer
     [TestClass]
     public class MobileHappyPath : BaseMobileTest
     {
-        public MobileHappyPath()
-        {
-        }
-               
         public MobileHappyPath(string pUrl)
         {
             url = pUrl;
@@ -32,7 +28,11 @@ namespace TgimbaSeleniumTests.Tests.InternetExplorer
         [TestMethod]
         public void TestHappyPathMobileInternetExplorer()
         {
-            TestHappyPath(new InternetExplorerDriver());
+            InternetExplorerOptions options = new InternetExplorerOptions();
+            options.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+
+            InternetExplorerDriver ied = new InternetExplorerDriver(options);
+            TestHappyPath(ied);
         }
     }
 }

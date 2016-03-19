@@ -4,39 +4,28 @@ namespace TgimbaSeleniumTests.Tests
 {
     [TestClass]
     public class RunAll
-    {
-        [TestMethod]
-        public void RunAllRemoteTests()
-        {
-            CleanUpRemote();
-            RunAllTestsRemote("http://www.tgimba.com/");
-        }
-        
+    {        
         [TestMethod]
         public void RunAllLocalTests()
         {
-            RunAllTestsLocal("http://localhost:51468/");
-        }
-
-        public void CleanUpRemote()
-        {
             BaseTest bt = new BaseTest();
-            bt.CleanUpRemote();
-        }
+            bt.Setup();
 
+            CleanUpLocal();
+            RunAllTestsLocalMobile("http://localhost:12738/WebBucketList/Mobile");
+
+            CleanUpLocal();
+            RunAllTestsLocalDesktop("http://localhost:12738/WebBucketList/Desktop");
+        }
+        
         public void CleanUpLocal()
         {
             BaseTest bt = new BaseTest();
             bt.CleanUpLocal();
         }
         
-        private void RunAllTestsLocal(string url)
+        private void RunAllTestsLocalDesktop(string url)
         {
-            BaseTest bt = new BaseTest();
-            bt.Setup();
-
-            CleanUpRemote();
-
             Chrome.DesktopHappyPath chromeDesk = new Chrome.DesktopHappyPath(url);
             chromeDesk.TestHappyPathChrome();
             CleanUpLocal();
@@ -48,37 +37,21 @@ namespace TgimbaSeleniumTests.Tests
             InternetExplorer.DesktopHappyPath ieDesk = new InternetExplorer.DesktopHappyPath(url);
             ieDesk.TestHappyPathInternetExplorer();
             CleanUpLocal();
+        }
 
-            int flipToMobile = 1;
-
-            Chrome.MobileHappyPath chromeMobile = new Chrome.MobileHappyPath(url);
-            chromeMobile.TestHappyPathMobileChrome();
+        private void RunAllTestsLocalMobile(string url)
+        {
+            Chrome.MobileHappyPath chromeDesk = new Chrome.MobileHappyPath(url);
+            chromeDesk.TestHappyPathMobileChrome();
             CleanUpLocal();
 
             Firefox.MobileHappyPath firefoxMobile = new Firefox.MobileHappyPath(url);
             firefoxMobile.TestHappyPathMobileFireFox();
             CleanUpLocal();
 
-            InternetExplorer.MobileHappyPath ieMobile = new InternetExplorer.MobileHappyPath(url);
-            ieMobile.TestHappyPathMobileInternetExplorer();
+            InternetExplorer.MobileHappyPath ieDesk = new InternetExplorer.MobileHappyPath(url);
+            ieDesk.TestHappyPathMobileInternetExplorer();
             CleanUpLocal();
-        }
-
-        private void RunAllTestsRemote(string url)
-        {
-            CleanUpRemote();
-
-            Chrome.DesktopHappyPath chromeDesk = new Chrome.DesktopHappyPath(url);
-            chromeDesk.TestHappyPathChrome();
-            CleanUpRemote();
-
-            Firefox.DesktopHappyPath firefoxDesk = new Firefox.DesktopHappyPath(url);
-            firefoxDesk.TestHappyPathFireFox();
-            CleanUpRemote();
-
-            InternetExplorer.DesktopHappyPath ieDesk = new InternetExplorer.DesktopHappyPath(url);
-            ieDesk.TestHappyPathInternetExplorer();
-            CleanUpRemote();
-        }
+        }        
     }
 }

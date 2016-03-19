@@ -16,11 +16,7 @@ namespace TgimbaSeleniumTests.Tests
 
             LaunchPageTest(browser, url);
             System.Threading.Thread.Sleep(_testStepInterval);
-
-            IWebElement link = browser.FindElementByLinkText("here");
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
-
+            
             //login/registration -----------------------------------------------
             LoginTest(browser, "test", "test", true);
             System.Threading.Thread.Sleep(_testStepInterval);

@@ -10,9 +10,6 @@ namespace TgimbaSeleniumTests.Tests.InternetExplorer
         {
             url = pUrl;
         }
-        public DesktopHappyPath()
-        {
-        }
 
         private TestContext testContextInstance;
 
@@ -31,7 +28,11 @@ namespace TgimbaSeleniumTests.Tests.InternetExplorer
         [TestMethod]
         public void TestHappyPathInternetExplorer()
         {
-            TestHappyPath(new InternetExplorerDriver());
+            InternetExplorerOptions options = new InternetExplorerOptions();
+            options.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+
+            InternetExplorerDriver ied = new InternetExplorerDriver(options);
+            TestHappyPath(ied);
         }
     }
 }

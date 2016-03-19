@@ -10,9 +10,6 @@ namespace TgimbaSeleniumTests.Tests.Chrome
         {
             url = pUrl;
         }
-        public DesktopHappyPath()
-        {
-        }
 
         private TestContext testContextInstance;
 
@@ -33,7 +30,7 @@ namespace TgimbaSeleniumTests.Tests.Chrome
         {
             ChromeOptions co = new ChromeOptions();
             co.AddArgument("--test-type");
-            ChromeDriver cd = new ChromeDriver(co);
+            ChromeDriver cd = new ChromeDriver("C:\\Users\\ehelin\\Downloads\\chromedriver_win32", co);
             TestHappyPath(cd);
         }
     }

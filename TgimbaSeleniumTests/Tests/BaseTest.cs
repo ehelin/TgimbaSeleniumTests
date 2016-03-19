@@ -8,8 +8,7 @@ namespace TgimbaSeleniumTests.Tests
 {
     public class BaseTest
     {
-        //TODO - make configuragble
-        protected int _testStepInterval = 1000;
+        protected int _testStepInterval = 100;
         protected string url = string.Empty;
 
         #region Base Test Methods
@@ -50,7 +49,6 @@ namespace TgimbaSeleniumTests.Tests
         protected void LaunchPageTest(RemoteWebDriver browser, string url)
         {
             browser.Navigate().GoToUrl(url);
-            string pageText = browser.FindElement(By.TagName("body")).Text;
         }
         protected void LoginTest(RemoteWebDriver browser, string userName, string passWord, bool expectedAlert)
         {
@@ -174,30 +172,26 @@ namespace TgimbaSeleniumTests.Tests
         {
             DeleteTestUser(Constants.TEST_USER, Constants.DB_CONN_LOCAL_HOST_BUCKETLIST);
         }
-        public void CleanUpRemote()
-        {
-            DeleteTestUser(Constants.TEST_USER, Constants.DB_CONN);
-        }
         public void Setup()
         {
             try
             {
-                CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB);
+                CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB, false);
             }
             catch (Exception e)
             {
                 if (!e.Message.Equals("Cannot drop the database 'BucketList', because it does not exist or you do not have permission."))
                     throw e;
             }
-            CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.CREATE_DB);
-            CreateSql(Constants.DB_CONN_LOCAL_HOST_BUCKETLIST, Constants.CREATE_SCHEMA);
-            CreateSql(Constants.DB_CONN_LOCAL_HOST_BUCKETLIST, Constants.CREATE_TABLE);
+            CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.CREATE_DB, true);
+            CreateSql(Constants.DB_CONN_LOCAL_HOST_BUCKETLIST, Constants.CREATE_SCHEMA, true);
+            CreateSql(Constants.DB_CONN_LOCAL_HOST_BUCKETLIST, Constants.CREATE_TABLE, true);
         }
         public void TearDown()
         {
-            CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB);
+            CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB, false);
         }
-        protected void CreateSql(string connectionString, string sql)
+        protected void CreateSql(string connectionString, string sql, bool errorFatal)
         {
             SqlConnection conn = null;
             SqlCommand cmd = null;
@@ -213,9 +207,12 @@ namespace TgimbaSeleniumTests.Tests
 
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+           catch (Exception ex)
             {
-                throw ex;
+                if (errorFatal)
+                    throw ex;
+                else
+                    Console.WriteLine("ERROR" + ex.Message);
             }
             finally
             {

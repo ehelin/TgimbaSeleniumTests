@@ -10,9 +10,6 @@ namespace TgimbaSeleniumTests.Tests.Firefox
         {
             url = pUrl;
         }
-        public MobileHappyPath()
-        {
-        }
 
         private TestContext testContextInstance;
 
