@@ -6,9 +6,9 @@ using OpenQA.Selenium.Support.UI;
 namespace TgimbaSeleniumTests.Tests
 {
     [TestClass]
-    public class BaseDesktopTest : BaseTest
+    public class BaseHappyPath : BaseTest
     {
-        public BaseDesktopTest() {}
+        public BaseHappyPath() {}
 
         protected void TestHappyPath(RemoteWebDriver browser)
         {
@@ -18,57 +18,57 @@ namespace TgimbaSeleniumTests.Tests
             System.Threading.Thread.Sleep(_testStepInterval);
             
             //login/registration -----------------------------------------------
-            LoginTest(browser, "test", "test", true);
+            //LoginTest(browser, "test", "test", true);
+            //System.Threading.Thread.Sleep(_testStepInterval);
+
+            //TestRegistration(browser, "testUser", "testUser23", "test@aol.com", true);
+            //System.Threading.Thread.Sleep(_testStepInterval);							 
+
+            LoginTest(browser, "", "", true);	   // replace with testuser/testuser23 once registration page is back
             System.Threading.Thread.Sleep(_testStepInterval);
 
-            TestRegistration(browser, "testUser", "testUser23", "test@aol.com", true);
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //LogOut(browser);
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            LoginTest(browser, "testUser", "testUser23", false);
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //LoginTest(browser, "testUser", "testUser23", false);
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            LogOut(browser);
-            System.Threading.Thread.Sleep(_testStepInterval);
+            ////menu tests -------------------------------------------------------
+            //AddItem(browser, "Bucket item test 1", "Hot");
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            LoginTest(browser, "testUser", "testUser23", false);
-            System.Threading.Thread.Sleep(_testStepInterval);
+            ////edit detail tests -----------------------------------------------
+            //AddItemFromEditMenu(browser);
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            //menu tests -------------------------------------------------------
-            AddItem(browser, "Bucket item test 1", "Hot");
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //EditItem(browser);
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            //edit detail tests -----------------------------------------------
-            AddItemFromEditMenu(browser);
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //DeleteItem(browser);
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            EditItem(browser);
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //DeleteItem(browser);
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            DeleteItem(browser);
-            System.Threading.Thread.Sleep(_testStepInterval);
+            ////search ----------------------------------------------------------
+            //AddItem(browser, "Bucket drive item test 1", "Hot");
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            DeleteItem(browser);
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //AddItem(browser, "Bucket drive item test 2", "Hot");
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            //search ----------------------------------------------------------
-            AddItem(browser, "Bucket drive item test 1", "Hot");
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //Search(browser);
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            AddItem(browser, "Bucket drive item test 2", "Hot");
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //DeleteItem(browser);
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            Search(browser);
-            System.Threading.Thread.Sleep(_testStepInterval);
+            ////sort ----------------------------------------------------------
+            //AddSortCategoryTestItems(browser);
 
-            DeleteItem(browser);
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //TestCategoryFilters(browser);
 
-            //sort ----------------------------------------------------------
-            AddSortCategoryTestItems(browser);
-
-            TestCategoryFilters(browser);
-
-            Sort(browser);
+            //Sort(browser);
             
             Utilities.CloseBrowser(browser);
         }

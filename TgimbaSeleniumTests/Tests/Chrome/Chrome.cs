@@ -4,9 +4,9 @@ using OpenQA.Selenium.Chrome;
 namespace TgimbaSeleniumTests.Tests.Chrome
 {
     [TestClass]
-    public class MobileHappyPath : BaseMobileTest
+    public class Chrome : BaseHappyPath
     {
-        public MobileHappyPath(string pUrl)
+        public Chrome(string pUrl)
         {
             url = pUrl;
         }
@@ -24,13 +24,12 @@ namespace TgimbaSeleniumTests.Tests.Chrome
                 testContextInstance = value;
             }
         }
-
-        [TestMethod]
-        public void TestHappyPathMobileChrome()
+					  
+        public void TestHappyPathChrome()
         {
             ChromeOptions co = new ChromeOptions();
             co.AddArgument("--test-type");
-            ChromeDriver cd = new ChromeDriver("C:\\Users\\ehelin\\Downloads\\chromedriver_win32", co);
+            ChromeDriver cd = new ChromeDriver();
             TestHappyPath(cd);
         }
     }

@@ -4,9 +4,9 @@ using OpenQA.Selenium.Firefox;
 namespace TgimbaSeleniumTests.Tests.Firefox
 {
     [TestClass]
-    public class MobileHappyPath : BaseMobileTest
+    public class Firefox : BaseHappyPath
     {
-        public MobileHappyPath(string pUrl)
+        public Firefox(string pUrl)
         {
             url = pUrl;
         }
@@ -24,9 +24,8 @@ namespace TgimbaSeleniumTests.Tests.Firefox
                 testContextInstance = value;
             }
         }
-
-        [TestMethod]
-        public void TestHappyPathMobileFireFox()
+						   
+        public void TestHappyPathFireFox()
         {
             TestHappyPath(new FirefoxDriver());
         }

@@ -50,20 +50,34 @@ namespace TgimbaSeleniumTests.Tests
         {
             browser.Navigate().GoToUrl(url);
         }
+		protected void SetUsernamePassword(RemoteWebDriver browser, string userName, string passWord) 
+		{
+            browser.FindElement(By.Id("tbLoginUsername")).SendKeys(userName);
+            browser.FindElement(By.Id("tbLoginPassword")).SendKeys(passWord);
+		}
         protected void LoginTest(RemoteWebDriver browser, string userName, string passWord, bool expectedAlert)
         {
-            browser.FindElement(By.Id("loginDesktopUserName")).SendKeys(userName);
-            browser.FindElement(By.Id("loginDesktopPassWord")).SendKeys(passWord);
+			CancelLoginTest(browser);
+
+			SetUsernamePassword(browser, userName, passWord);
 
             System.Threading.Thread.Sleep(_testStepInterval);
 
-            IWebElement link = browser.FindElement(By.Id("loginDesktopSubmitClick"));
+            IWebElement link = browser.FindElement(By.Id("hvJsLoginBtn"));
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval + 1000);
 
             if (expectedAlert)
                 browser.SwitchTo().Alert().Accept();
         }
+		protected void CancelLoginTest(RemoteWebDriver browser)
+		{
+			IWebElement link = browser.FindElement(By.Id("hvJsCancelBtn"));
+            link.Click();
+            System.Threading.Thread.Sleep(_testStepInterval + 1000);
+
+            browser.SwitchTo().Alert().Accept();
+		}
         protected void TestRegistration(RemoteWebDriver browser, string userName, string passWord, string email, bool expectedAlert)
         {
             IWebElement link = browser.FindElement(By.Id("registerDesktopClick"));
@@ -170,105 +184,105 @@ namespace TgimbaSeleniumTests.Tests
         
         public void CleanUpLocal()
         {
-            DeleteTestUser(Constants.TEST_USER, Constants.DB_CONN_LOCAL_HOST_BUCKETLIST);
+            //DeleteTestUser(Constants.TEST_USER, Constants.DB_CONN_LOCAL_HOST_BUCKETLIST);
         }
         public void Setup()
         {
-            try
-            {
-                CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB, false);
-            }
-            catch (Exception e)
-            {
-                if (!e.Message.Equals("Cannot drop the database 'BucketList', because it does not exist or you do not have permission."))
-                    throw e;
-            }
-            CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.CREATE_DB, true);
-            CreateSql(Constants.DB_CONN_LOCAL_HOST_BUCKETLIST, Constants.CREATE_SCHEMA, true);
-            CreateSql(Constants.DB_CONN_LOCAL_HOST_BUCKETLIST, Constants.CREATE_TABLE, true);
+            //try
+            //{
+            //    CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB, false);
+            //}
+            //catch (Exception e)
+            //{
+            //    if (!e.Message.Equals("Cannot drop the database 'BucketList', because it does not exist or you do not have permission."))
+            //        throw e;
+            //}
+            //CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.CREATE_DB, true);
+            //CreateSql(Constants.DB_CONN_LOCAL_HOST_BUCKETLIST, Constants.CREATE_SCHEMA, true);
+            //CreateSql(Constants.DB_CONN_LOCAL_HOST_BUCKETLIST, Constants.CREATE_TABLE, true);
         }
         public void TearDown()
         {
-            CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB, false);
+            //CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB, false);
         }
-        protected void CreateSql(string connectionString, string sql, bool errorFatal)
-        {
-            SqlConnection conn = null;
-            SqlCommand cmd = null;
+        //protected void CreateSql(string connectionString, string sql, bool errorFatal)
+        //{
+        //    SqlConnection conn = null;
+        //    SqlCommand cmd = null;
 
-            try
-            {
-                conn = new SqlConnection(connectionString);
-                cmd = conn.CreateCommand();
-                cmd.CommandText = sql;
-                cmd.CommandType = System.Data.CommandType.Text;
+        //    try
+        //    {
+        //        conn = new SqlConnection(connectionString);
+        //        cmd = conn.CreateCommand();
+        //        cmd.CommandText = sql;
+        //        cmd.CommandType = System.Data.CommandType.Text;
             
-                cmd.Connection.Open();
+        //        cmd.Connection.Open();
 
-                cmd.ExecuteNonQuery();
-            }
-           catch (Exception ex)
-            {
-                if (errorFatal)
-                    throw ex;
-                else
-                    Console.WriteLine("ERROR" + ex.Message);
-            }
-            finally
-            {
-                if (conn != null)
-                {
-                    conn.Close();
-                    conn.Dispose();
-                    conn = null;
-                }
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //   catch (Exception ex)
+        //    {
+        //        if (errorFatal)
+        //            throw ex;
+        //        else
+        //            Console.WriteLine("ERROR" + ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        if (conn != null)
+        //        {
+        //            conn.Close();
+        //            conn.Dispose();
+        //            conn = null;
+        //        }
 
-                if (cmd != null)
-                {
-                    cmd.Dispose();
-                    cmd = null;
-                }
-            }
+        //        if (cmd != null)
+        //        {
+        //            cmd.Dispose();
+        //            cmd = null;
+        //        }
+        //    }
 
-        }
-        protected void DeleteTestUser(string userName, string connectionString)
-        {
-            SqlConnection conn = null;
-            SqlCommand cmd = null;
+        //}
+        //protected void DeleteTestUser(string userName, string connectionString)
+        //{
+        //    SqlConnection conn = null;
+        //    SqlCommand cmd = null;
 
-            try
-            {
-                conn = new SqlConnection(connectionString);
-                cmd = conn.CreateCommand();
-                cmd.CommandText = Constants.DELETE_TEST_USER;
-                cmd.CommandType = System.Data.CommandType.Text;
+        //    try
+        //    {
+        //        conn = new SqlConnection(connectionString);
+        //        cmd = conn.CreateCommand();
+        //        cmd.CommandText = Constants.DELETE_TEST_USER;
+        //        cmd.CommandType = System.Data.CommandType.Text;
 
-                cmd.Parameters.Add(new SqlParameter("@userName", userName));
+        //        cmd.Parameters.Add(new SqlParameter("@userName", userName));
 
-                cmd.Connection.Open();
+        //        cmd.Connection.Open();
 
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                if (conn != null)
-                {
-                    conn.Close();
-                    conn.Dispose();
-                    conn = null;
-                }
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        if (conn != null)
+        //        {
+        //            conn.Close();
+        //            conn.Dispose();
+        //            conn = null;
+        //        }
 
-                if (cmd != null)
-                {
-                    cmd.Dispose();
-                    cmd = null;
-                }
-            }
-        }
+        //        if (cmd != null)
+        //        {
+        //            cmd.Dispose();
+        //            cmd = null;
+        //        }
+        //    }
+        //}
 
         #endregion
     }
