@@ -65,7 +65,7 @@ namespace TgimbaSeleniumTests.Tests
 
             IWebElement link = browser.FindElement(By.Id("hvJsLoginBtn"));
             link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval + 1000);
+            System.Threading.Thread.Sleep(_testStepInterval + 5000);
 
             if (expectedAlert)
                 browser.SwitchTo().Alert().Accept();

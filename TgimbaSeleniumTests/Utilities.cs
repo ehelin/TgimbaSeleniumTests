@@ -19,8 +19,8 @@ namespace TgimbaSeleniumTests
 			return new List<string>{
 				"http://localhost:61755/home/HtmlVanillaJsIndex",	// Vanilla JS
 				"http://localhost:61755/home/HtmlJQueryIndex",		// JQuery
-				//"https://localhost:44367/",							// Angular 6
-				//"https://localhost:44340/",							// React JS
+				"http://localhost:62356/",							// Angular 6
+				"http://localhost:59259/",							// React JS
 			};
 		}
     }
