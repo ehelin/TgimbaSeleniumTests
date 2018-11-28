@@ -52,12 +52,12 @@ namespace TgimbaSeleniumTests.Tests
         }
 		protected void SetUsernamePassword(RemoteWebDriver browser, string userName, string passWord) 
 		{
-            browser.FindElement(By.Id("tbLoginUsername")).SendKeys(userName);
-            browser.FindElement(By.Id("tbLoginPassword")).SendKeys(passWord);
+            browser.FindElement(By.Id("USER_CONTROL_LOGIN_USERNAME")).SendKeys(userName);
+            browser.FindElement(By.Id("USER_CONTROL_LOGIN_PASSWORD")).SendKeys(passWord);
 		}
         protected void LoginTest(RemoteWebDriver browser, string userName, string passWord, bool expectedAlert)
         {
-			CancelLoginTest(browser);
+			CancelLoginTest(browser, "hvJsCancelBtn");
 
 			SetUsernamePassword(browser, userName, passWord);
 
@@ -70,9 +70,9 @@ namespace TgimbaSeleniumTests.Tests
             if (expectedAlert)
                 browser.SwitchTo().Alert().Accept();
         }
-		protected void CancelLoginTest(RemoteWebDriver browser)
+		protected void CancelLoginTest(RemoteWebDriver browser, string cancelBtnId)
 		{
-			IWebElement link = browser.FindElement(By.Id("hvJsCancelBtn"));
+			IWebElement link = browser.FindElement(By.Id(cancelBtnId));
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval + 1000);
 
@@ -80,23 +80,23 @@ namespace TgimbaSeleniumTests.Tests
 		}
         protected void TestRegistration(RemoteWebDriver browser, string userName, string passWord, string email, bool expectedAlert)
         {
-            IWebElement link = browser.FindElement(By.Id("registerDesktopClick"));
+            IWebElement link = browser.FindElement(By.Id("hvJsRegisterPanelBtn"));
             link.Click();
 
             System.Threading.Thread.Sleep(_testStepInterval);
 
-            browser.FindElement(By.Id("registerDesktopUserName")).SendKeys(userName);
-            browser.FindElement(By.Id("registerDesktopEmail")).SendKeys(email);
-            browser.FindElement(By.Id("registerDesktopPassword")).SendKeys(passWord);
-            browser.FindElement(By.Id("registerDesktopConfirmPassword")).SendKeys(passWord);
+            browser.FindElement(By.Id("USER_CONTROL_REGISTRATION_USERNAME")).SendKeys(userName);
+            browser.FindElement(By.Id("USER_CONTROL_REGISTRATION_EMAIL")).SendKeys(email);
+            browser.FindElement(By.Id("USER_CONTROL_REGISTRATION_PASSWORD")).SendKeys(passWord);
+            browser.FindElement(By.Id("USER_CONTROL_REGISTRATION_CONFIRM_PASSWORD")).SendKeys(passWord);
             System.Threading.Thread.Sleep(_testStepInterval);
 
-            link = browser.FindElement(By.Id("registerDesktopSubmitClick"));
+            link = browser.FindElement(By.Id("hvJsRegisterBtn"));
             link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
+            System.Threading.Thread.Sleep(4000);
 
             if (expectedAlert)
-                browser.SwitchTo().Alert().Accept();
+                browser.SwitchTo().Alert().Accept();			 
         }
         protected void Sort(RemoteWebDriver browser)
         {
@@ -184,7 +184,7 @@ namespace TgimbaSeleniumTests.Tests
         
         public void CleanUpLocal()
         {
-            //DeleteTestUser(Constants.TEST_USER, Constants.DB_CONN_LOCAL_HOST_BUCKETLIST);
+            DeleteTestUser(Constants.TEST_USER, Constants.DB_CONN_LOCAL_HOST_BUCKETLIST);
         }
         public void Setup()
         {
@@ -205,85 +205,85 @@ namespace TgimbaSeleniumTests.Tests
         {
             //CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB, false);
         }
-        //protected void CreateSql(string connectionString, string sql, bool errorFatal)
-        //{
-        //    SqlConnection conn = null;
-        //    SqlCommand cmd = null;
+		//protected void CreateSql(string connectionString, string sql, bool errorFatal)
+		//{
+		//    SqlConnection conn = null;
+		//    SqlCommand cmd = null;
 
-        //    try
-        //    {
-        //        conn = new SqlConnection(connectionString);
-        //        cmd = conn.CreateCommand();
-        //        cmd.CommandText = sql;
-        //        cmd.CommandType = System.Data.CommandType.Text;
-            
-        //        cmd.Connection.Open();
+		//    try
+		//    {
+		//        conn = new SqlConnection(connectionString);
+		//        cmd = conn.CreateCommand();
+		//        cmd.CommandText = sql;
+		//        cmd.CommandType = System.Data.CommandType.Text;
 
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //   catch (Exception ex)
-        //    {
-        //        if (errorFatal)
-        //            throw ex;
-        //        else
-        //            Console.WriteLine("ERROR" + ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        if (conn != null)
-        //        {
-        //            conn.Close();
-        //            conn.Dispose();
-        //            conn = null;
-        //        }
+		//        cmd.Connection.Open();
 
-        //        if (cmd != null)
-        //        {
-        //            cmd.Dispose();
-        //            cmd = null;
-        //        }
-        //    }
+		//        cmd.ExecuteNonQuery();
+		//    }
+		//   catch (Exception ex)
+		//    {
+		//        if (errorFatal)
+		//            throw ex;
+		//        else
+		//            Console.WriteLine("ERROR" + ex.Message);
+		//    }
+		//    finally
+		//    {
+		//        if (conn != null)
+		//        {
+		//            conn.Close();
+		//            conn.Dispose();
+		//            conn = null;
+		//        }
 
-        //}
-        //protected void DeleteTestUser(string userName, string connectionString)
-        //{
-        //    SqlConnection conn = null;
-        //    SqlCommand cmd = null;
+		//        if (cmd != null)
+		//        {
+		//            cmd.Dispose();
+		//            cmd = null;
+		//        }
+		//    }
 
-        //    try
-        //    {
-        //        conn = new SqlConnection(connectionString);
-        //        cmd = conn.CreateCommand();
-        //        cmd.CommandText = Constants.DELETE_TEST_USER;
-        //        cmd.CommandType = System.Data.CommandType.Text;
+		//}
+		protected void DeleteTestUser(string userName, string connectionString)
+		{
+			SqlConnection conn = null;
+			SqlCommand cmd = null;
 
-        //        cmd.Parameters.Add(new SqlParameter("@userName", userName));
+			try
+			{
+				conn = new SqlConnection(connectionString);
+				cmd = conn.CreateCommand();
+				cmd.CommandText = Constants.DELETE_TEST_USER;
+				cmd.CommandType = System.Data.CommandType.Text;
 
-        //        cmd.Connection.Open();
+				cmd.Parameters.Add(new SqlParameter("@userName", userName));
 
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        if (conn != null)
-        //        {
-        //            conn.Close();
-        //            conn.Dispose();
-        //            conn = null;
-        //        }
+				cmd.Connection.Open();
 
-        //        if (cmd != null)
-        //        {
-        //            cmd.Dispose();
-        //            cmd = null;
-        //        }
-        //    }
-        //}
+				cmd.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				if (conn != null)
+				{
+					conn.Close();
+					conn.Dispose();
+					conn = null;
+				}
 
-        #endregion
-    }
+				if (cmd != null)
+				{
+					cmd.Dispose();
+					cmd = null;
+				}
+			}
+		}
+
+		#endregion
+	}
 }

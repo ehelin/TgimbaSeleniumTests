@@ -4,7 +4,7 @@
     {        
         public const string TEST_USER = "testUser";
         public const string DB_CONN_LOCAL_HOST_MASTER = "Data Source=localhost;Initial Catalog=master;Integrated Security=true;";
-        public const string DB_CONN_LOCAL_HOST_BUCKETLIST = "Data Source=localhost;Initial Catalog=BucketList;Integrated Security=true;";
+        public const string DB_CONN_LOCAL_HOST_BUCKETLIST = "Data Source=DESKTOP-T0D67EL\\SQLEXPRESS;Initial Catalog=SQL2016_974243_bucketlist;Integrated Security=true;";
         
         public const string DROP_DB = " EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'BucketList' " 
                                     + " ALTER DATABASE[BucketList] SET SINGLE_USER WITH ROLLBACK IMMEDIATE "

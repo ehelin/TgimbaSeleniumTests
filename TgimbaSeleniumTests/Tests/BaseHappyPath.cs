@@ -18,14 +18,14 @@ namespace TgimbaSeleniumTests.Tests
             System.Threading.Thread.Sleep(_testStepInterval);
             
             //login/registration -----------------------------------------------
-            //LoginTest(browser, "test", "test", true);
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            //TestRegistration(browser, "testUser", "testUser23", "test@aol.com", true);
-            //System.Threading.Thread.Sleep(_testStepInterval);							 
-
-            LoginTest(browser, "", "", true);	   // replace with testuser/testuser23 once registration page is back
+            LoginTest(browser, "test", "test", true);
             System.Threading.Thread.Sleep(_testStepInterval);
+
+            TestRegistration(browser, "testUser", "testUser23", "test@aol.com", true);
+            System.Threading.Thread.Sleep(_testStepInterval);							 
+
+            //LoginTest(browser, "testUser", "testUser23", true);	   
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
             //LogOut(browser);
             //System.Threading.Thread.Sleep(_testStepInterval);
