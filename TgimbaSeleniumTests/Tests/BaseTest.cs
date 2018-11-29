@@ -80,7 +80,7 @@ namespace TgimbaSeleniumTests.Tests
 		}
         protected void TestRegistration(RemoteWebDriver browser, string userName, string passWord, string email, bool expectedAlert)
         {
-            IWebElement link = browser.FindElement(By.Id("hvJsRegisterPanelBtn"));
+            IWebElement link = browser.FindElement(By.Id("hvJsRegisterPanelBtn"));	//hvJsRegisterBtn
             link.Click();
 
             System.Threading.Thread.Sleep(_testStepInterval);

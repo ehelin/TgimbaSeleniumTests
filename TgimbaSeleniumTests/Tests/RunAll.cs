@@ -28,11 +28,11 @@ namespace TgimbaSeleniumTests.Tests
         {
 			Chrome.Chrome chromeDesk = new Chrome.Chrome(url);
 			chromeDesk.TestHappyPathChrome();
-			CleanUpLocal();
+			//CleanUpLocal();
 
 			Firefox.Firefox firefoxDesk = new Firefox.Firefox(url);
             firefoxDesk.TestHappyPathFireFox();
-            CleanUpLocal();				
+            //CleanUpLocal();				
         }    
     }
 }
