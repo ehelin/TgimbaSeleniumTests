@@ -11,12 +11,12 @@ namespace TgimbaSeleniumTests.Tests
             BaseTest bt = new BaseTest();
             bt.Setup();
 
-			foreach(string url in Utilities.GetUrls())
-			{										   
-				CleanUpLocal();								  
+			foreach (string url in Utilities.GetUrls())
+			{
+				CleanUpLocal();
 				RunAllTestsLocalDesktop(url);
-			}																			  
-        }
+			}
+		}
         
         public void CleanUpLocal()
         {
@@ -28,10 +28,10 @@ namespace TgimbaSeleniumTests.Tests
         {
 			Chrome.Chrome chromeDesk = new Chrome.Chrome(url);
 			chromeDesk.TestHappyPathChrome();
-			//CleanUpLocal();
+			CleanUpLocal();
 
-			Firefox.Firefox firefoxDesk = new Firefox.Firefox(url);
-            firefoxDesk.TestHappyPathFireFox();
+			//Firefox.Firefox firefoxDesk = new Firefox.Firefox(url);
+            //firefoxDesk.TestHappyPathFireFox();
             //CleanUpLocal();				
         }    
     }
