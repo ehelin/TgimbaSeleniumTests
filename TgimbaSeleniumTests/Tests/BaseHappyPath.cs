@@ -24,8 +24,11 @@ namespace TgimbaSeleniumTests.Tests
             TestRegistration(browser, "testUser", "testUser23", "test@aol.com", true);
             System.Threading.Thread.Sleep(_testStepInterval);							 
 
-            //LoginTest(browser, "testUser", "testUser23", true);	   
-            //System.Threading.Thread.Sleep(_testStepInterval);
+            LoginTest(browser, "testUser", "testUser23", true);	   
+            System.Threading.Thread.Sleep(_testStepInterval);
+													
+			// tmp...wait for main panel to display
+            System.Threading.Thread.Sleep(10000);
 
             //LogOut(browser);
             //System.Threading.Thread.Sleep(_testStepInterval);

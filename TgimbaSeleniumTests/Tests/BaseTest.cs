@@ -57,7 +57,7 @@ namespace TgimbaSeleniumTests.Tests
 		}
         protected void LoginTest(RemoteWebDriver browser, string userName, string passWord, bool expectedAlert)
         {
-			CancelLoginTest(browser, "hvJsCancelBtn");
+			//CancelLoginTest(browser, "hvJsCancelBtn");
 
 			SetUsernamePassword(browser, userName, passWord);
 
