@@ -29,14 +29,10 @@ namespace TgimbaSeleniumTests.Tests
 													
 			// tmp...wait for main panel to display
             System.Threading.Thread.Sleep(10000);
+														
+            //menu tests -------------------------------------------------------
+			Menu(browser);
 
-            //LogOut(browser);
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            //LoginTest(browser, "testUser", "testUser23", false);
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            ////menu tests -------------------------------------------------------
             //AddItem(browser, "Bucket item test 1", "Hot");
             //System.Threading.Thread.Sleep(_testStepInterval);
 
@@ -75,6 +71,28 @@ namespace TgimbaSeleniumTests.Tests
             
             Utilities.CloseBrowser(browser);
         }
+
+		protected void Menu(RemoteWebDriver browser) 
+		{
+			// show menu	
+			MenuAction(browser, "btnMainMenu");			 
+
+			// cancel button						  
+			MenuAction(browser, "hvJsCancelBtn");	
+
+			// show menu	
+			MenuAction(browser, "btnMainMenu");		  
+
+			// logout button						  
+			MenuAction(browser, "hvJsLogOutBtn");							
+		}
+
+		private void MenuAction(RemoteWebDriver browser, string buttonName)
+		{			
+            IWebElement link = browser.FindElement(By.Id(buttonName));
+            link.Click();
+            System.Threading.Thread.Sleep(5000);
+		}
 
         protected void Search(RemoteWebDriver browser)
         {
