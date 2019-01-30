@@ -21,20 +21,24 @@ namespace TgimbaSeleniumTests.Tests
             LoginTest(browser, "test", "test", true);
             System.Threading.Thread.Sleep(_testStepInterval);
 
-            TestRegistration(browser, "testUser", "testUser23", "test@aol.com", true);
+            TestRegistration(browser, "testUser", "testUser23", "test@aol.com", false);
             System.Threading.Thread.Sleep(_testStepInterval);							 
 
-            LoginTest(browser, "testUser", "testUser23", true);	   
+            LoginTest(browser, "testUser", "testUser23", false);	   
             System.Threading.Thread.Sleep(_testStepInterval);
 													
 			// tmp...wait for main panel to display
-            System.Threading.Thread.Sleep(10000);
+            System.Threading.Thread.Sleep(_testStepInterval);
 														
             //menu tests -------------------------------------------------------
 			Menu(browser);
 
-            //AddItem(browser, "Bucket item test 1", "Hot");
-            //System.Threading.Thread.Sleep(_testStepInterval);
+			// add item	  	
+            AddItem(browser, "Bucket item test 1", "Hot", "1.2", "2.1");
+            System.Threading.Thread.Sleep(_testStepInterval);	  
+						
+			ClickAction(browser, "btnMainMenu");						  
+			ClickAction(browser, "hvJsLogOutBtn");	// logout 	
 
             ////edit detail tests -----------------------------------------------
             //AddItemFromEditMenu(browser);
@@ -73,25 +77,12 @@ namespace TgimbaSeleniumTests.Tests
         }
 
 		protected void Menu(RemoteWebDriver browser) 
-		{
+		{				   
 			// show menu	
-			MenuAction(browser, "btnMainMenu");			 
+			ClickAction(browser, "btnMainMenu");			 
 
 			// cancel button						  
-			MenuAction(browser, "hvJsCancelBtn");	
-
-			// show menu	
-			MenuAction(browser, "btnMainMenu");		  
-
-			// logout button						  
-			MenuAction(browser, "hvJsLogOutBtn");							
-		}
-
-		private void MenuAction(RemoteWebDriver browser, string buttonName)
-		{			
-            IWebElement link = browser.FindElement(By.Id(buttonName));
-            link.Click();
-            System.Threading.Thread.Sleep(5000);
+			ClickAction(browser, "hvJsCancelBtn");		  					
 		}
 
         protected void Search(RemoteWebDriver browser)

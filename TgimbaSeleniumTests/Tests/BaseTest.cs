@@ -11,7 +11,14 @@ namespace TgimbaSeleniumTests.Tests
         protected int _testStepInterval = 100;
         protected string url = string.Empty;
 
-        #region Base Test Methods
+        #region Base Test Methods		
+
+		protected void ClickAction(RemoteWebDriver browser, string buttonName)
+		{			
+            IWebElement link = browser.FindElement(By.Id(buttonName));
+            link.Click();
+            System.Threading.Thread.Sleep(_testStepInterval);
+		}
 
         protected void LogOut(RemoteWebDriver browser)
         {
@@ -23,28 +30,30 @@ namespace TgimbaSeleniumTests.Tests
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval);
         }
-        protected void AddItem(RemoteWebDriver browser, string bucketListName, string category)
+        protected void AddItem(RemoteWebDriver browser, string bucketListName, string category, string latitude, string longitude)
         {
-            IWebElement link = browser.FindElement(By.Id("MenuRequest"));
-            link.Click();
-
+			// show add screen, cancel and reshow add screen
+			ClickAction(browser, "btnMainMenu");				
+			ClickAction(browser, "hvJsAddBucketListItemBtn");				
+			ClickAction(browser, "hvJsAddCancellBtn");			   
+			ClickAction(browser, "btnMainMenu");				
+			ClickAction(browser, "hvJsAddBucketListItemBtn");	
+																   
+            browser.FindElement(By.Id("USER_CONTROL_ADD_ITEM_NAME")).SendKeys(bucketListName);
             System.Threading.Thread.Sleep(_testStepInterval);
 
-            link = browser.FindElement(By.Id("AddBucketListItem"));
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
-
-            browser.FindElement(By.Id("BIItemName")).SendKeys(bucketListName);
-            System.Threading.Thread.Sleep(_testStepInterval);
-
-            IWebElement rankingItemSelect = browser.FindElement(By.Name("rankingItemSelect"));
+            IWebElement rankingItemSelect = browser.FindElement(By.Id("USER_CONTROL_ADD_ITEM_CATEGORY"));
             SelectElement selectElement = new SelectElement(rankingItemSelect);
             selectElement.SelectByText(category);
             System.Threading.Thread.Sleep(_testStepInterval);
 
-            link = browser.FindElement(By.Id("AddBIButtonSubmit"));
-            link.Click();
+            browser.FindElement(By.Id("USER_CONTROL_ADD_LATITUDE")).SendKeys(latitude);
             System.Threading.Thread.Sleep(_testStepInterval);
+
+            browser.FindElement(By.Id("USER_CONTROL_ADD_LONGITUDE")).SendKeys(longitude);
+            System.Threading.Thread.Sleep(_testStepInterval);
+																  
+			ClickAction(browser, "hvJsAddSubmitBtn");	
         }
         protected void LaunchPageTest(RemoteWebDriver browser, string url)
         {
@@ -65,7 +74,7 @@ namespace TgimbaSeleniumTests.Tests
 
             IWebElement link = browser.FindElement(By.Id("hvJsLoginBtn"));
             link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval + 5000);
+            System.Threading.Thread.Sleep(_testStepInterval);
 
             if (expectedAlert)
                 browser.SwitchTo().Alert().Accept();
@@ -74,7 +83,7 @@ namespace TgimbaSeleniumTests.Tests
 		{
 			IWebElement link = browser.FindElement(By.Id(cancelBtnId));
             link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval + 1000);
+            System.Threading.Thread.Sleep(_testStepInterval);
 
             browser.SwitchTo().Alert().Accept();
 		}
@@ -93,7 +102,7 @@ namespace TgimbaSeleniumTests.Tests
 
             link = browser.FindElement(By.Id("hvJsRegisterBtn"));
             link.Click();
-            System.Threading.Thread.Sleep(4000);
+            System.Threading.Thread.Sleep(_testStepInterval);
 
             if (expectedAlert)
                 browser.SwitchTo().Alert().Accept();			 
@@ -138,26 +147,26 @@ namespace TgimbaSeleniumTests.Tests
         }
         protected void AddSortCategoryTestItems(RemoteWebDriver browser)
         {
-            AddItem(browser, "Bucket item test 3", "Hot");
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //AddItem(browser, "Bucket item test 3", "Hot");
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            AddItem(browser, "Bucket item test 1", "Cool");
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //AddItem(browser, "Bucket item test 1", "Cool");
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            AddItem(browser, "Bucket item test 7", "Warm");
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //AddItem(browser, "Bucket item test 7", "Warm");
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            AddItem(browser, "Bucket item test 5", "Hot");
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //AddItem(browser, "Bucket item test 5", "Hot");
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            AddItem(browser, "Bucket item test 4", "Warm");
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //AddItem(browser, "Bucket item test 4", "Warm");
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            AddItem(browser, "Bucket item test 2", "Cool");
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //AddItem(browser, "Bucket item test 2", "Cool");
+            //System.Threading.Thread.Sleep(_testStepInterval);
 
-            AddItem(browser, "Bucket item test 6", "Hot");
-            System.Threading.Thread.Sleep(_testStepInterval);
+            //AddItem(browser, "Bucket item test 6", "Hot");
+            //System.Threading.Thread.Sleep(_testStepInterval);
         }
         protected void TestCategoryFilters(RemoteWebDriver browser)
         {
