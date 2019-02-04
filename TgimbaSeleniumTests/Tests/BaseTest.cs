@@ -8,7 +8,7 @@ namespace TgimbaSeleniumTests.Tests
 {
     public class BaseTest
     {
-        protected int _testStepInterval = 100;
+        protected int _testStepInterval = 5000;
         protected string url = string.Empty;
 
         #region Base Test Methods		
