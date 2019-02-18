@@ -8,7 +8,7 @@ namespace TgimbaSeleniumTests.Tests
 {
     public class BaseTest
     {
-        protected int _testStepInterval = 5000;
+        protected int _testStepInterval = 1000;
         protected string url = string.Empty;
 
         #region Base Test Methods		
@@ -31,14 +31,14 @@ namespace TgimbaSeleniumTests.Tests
             System.Threading.Thread.Sleep(_testStepInterval);
         }
         protected void AddItem(RemoteWebDriver browser, string bucketListName, string category, string latitude, string longitude)
-        {
+        {	   						
 			// show add screen, cancel and reshow add screen
 			ClickAction(browser, "btnMainMenu");				
 			ClickAction(browser, "hvJsAddBucketListItemBtn");				
 			ClickAction(browser, "hvJsAddCancellBtn");			   
 			ClickAction(browser, "btnMainMenu");				
-			ClickAction(browser, "hvJsAddBucketListItemBtn");	
-																   
+			ClickAction(browser, "hvJsAddBucketListItemBtn");
+										   
             browser.FindElement(By.Id("USER_CONTROL_ADD_ITEM_NAME")).SendKeys(bucketListName);
             System.Threading.Thread.Sleep(_testStepInterval);
 
@@ -55,6 +55,34 @@ namespace TgimbaSeleniumTests.Tests
 																  
 			ClickAction(browser, "hvJsAddSubmitBtn");	
         }
+        protected void EditItem(RemoteWebDriver browser, string bucketListName, string category, string latitude, string longitude)
+        {	   																   			// show add screen, cancel and reshow add screen
+			ClickAction(browser, "hvJsFormEditBtn");				
+			ClickAction(browser, "hvJsEditCancellBtn");				
+			ClickAction(browser, "hvJsFormEditBtn");			
+																								  
+            browser.FindElement(By.Id("USER_CONTROL_EDIT_ITEM_NAME")).Clear();	  
+            System.Threading.Thread.Sleep(_testStepInterval);
+            browser.FindElement(By.Id("USER_CONTROL_EDIT_ITEM_NAME")).SendKeys(bucketListName);
+            System.Threading.Thread.Sleep(_testStepInterval);
+
+            IWebElement rankingItemSelect = browser.FindElement(By.Id("USER_CONTROL_EDIT_ITEM_CATEGORY"));
+            SelectElement selectElement = new SelectElement(rankingItemSelect);
+            selectElement.SelectByText(category);
+            System.Threading.Thread.Sleep(_testStepInterval);
+																							
+            browser.FindElement(By.Id("USER_CONTROL_EDIT_LATITUDE")).Clear();		 
+            System.Threading.Thread.Sleep(_testStepInterval);
+            browser.FindElement(By.Id("USER_CONTROL_EDIT_LATITUDE")).SendKeys(latitude);
+            System.Threading.Thread.Sleep(_testStepInterval);
+																						   
+            browser.FindElement(By.Id("USER_CONTROL_EDIT_LONGITUDE")).Clear();	   
+            System.Threading.Thread.Sleep(_testStepInterval);
+            browser.FindElement(By.Id("USER_CONTROL_EDIT_LONGITUDE")).SendKeys(longitude);
+            System.Threading.Thread.Sleep(_testStepInterval);
+																  
+			ClickAction(browser, "hvJsEditSubmitBtn");	
+        }		 
         protected void LaunchPageTest(RemoteWebDriver browser, string url)
         {
             browser.Navigate().GoToUrl(url);

@@ -36,15 +36,19 @@ namespace TgimbaSeleniumTests.Tests
 			// add item	  	
             AddItem(browser, "Bucket item test 1", "Hot", "1.2", "2.1");
             System.Threading.Thread.Sleep(_testStepInterval);	  
+
+			// edit item
+			EditItem(browser, "Updated Bucket item test 1", "Warm", "3.4", "10.9");
+            System.Threading.Thread.Sleep(_testStepInterval);
+				   			
+			// delete item
+			ClickAction(browser, "hvJsFormDeleteBtn");	
 						
 			ClickAction(browser, "btnMainMenu");						  
 			ClickAction(browser, "hvJsLogOutBtn");	// logout 	
 
             ////edit detail tests -----------------------------------------------
             //AddItemFromEditMenu(browser);
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            //EditItem(browser);
             //System.Threading.Thread.Sleep(_testStepInterval);
 
             //DeleteItem(browser);
@@ -163,28 +167,28 @@ namespace TgimbaSeleniumTests.Tests
             link = browser.FindElement(By.Id("AddBIButtonSubmit"));
             link.Click();
         }
-        protected void EditItem(RemoteWebDriver browser)
-        {
-            IWebElement link = browser.FindElement(By.Id("blAHrefLink0"));
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
+        //protected void EditItem(RemoteWebDriver browser)
+        //{
+        //    IWebElement link = browser.FindElement(By.Id("blAHrefLink0"));
+        //    link.Click();
+        //    System.Threading.Thread.Sleep(_testStepInterval);
 
-            link = browser.FindElement(By.Id("DesktopEditButton"));
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
+        //    link = browser.FindElement(By.Id("DesktopEditButton"));
+        //    link.Click();
+        //    System.Threading.Thread.Sleep(_testStepInterval);
 
-            browser.FindElement(By.Id("BIItemName")).Clear();
-            browser.FindElement(By.Id("BIItemName")).SendKeys("Bucket item test 1 with edited item value");
-            System.Threading.Thread.Sleep(_testStepInterval);
+        //    browser.FindElement(By.Id("BIItemName")).Clear();
+        //    browser.FindElement(By.Id("BIItemName")).SendKeys("Bucket item test 1 with edited item value");
+        //    System.Threading.Thread.Sleep(_testStepInterval);
 
-            IWebElement rankingItemSelect = browser.FindElement(By.Name("rankingItemSelect"));
-            SelectElement selectElement = new SelectElement(rankingItemSelect);
-            selectElement.SelectByText("Warm");
-            System.Threading.Thread.Sleep(_testStepInterval);
+        //    IWebElement rankingItemSelect = browser.FindElement(By.Name("rankingItemSelect"));
+        //    SelectElement selectElement = new SelectElement(rankingItemSelect);
+        //    selectElement.SelectByText("Warm");
+        //    System.Threading.Thread.Sleep(_testStepInterval);
 
-            link = browser.FindElement(By.Id("EditBIButtonSubmit"));
-            link.Click();
-        }
+        //    link = browser.FindElement(By.Id("EditBIButtonSubmit"));
+        //    link.Click();
+        //}
         protected void DeleteItem(RemoteWebDriver browser)
         {
             IWebElement link = browser.FindElement(By.Id("blAHrefLink0"));
