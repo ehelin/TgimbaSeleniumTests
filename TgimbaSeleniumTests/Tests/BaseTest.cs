@@ -47,6 +47,10 @@ namespace TgimbaSeleniumTests.Tests
             selectElement.SelectByText(category);
             System.Threading.Thread.Sleep(_testStepInterval);
 
+			IWebElement radioBtn = browser.FindElement(By.Id("USER_CONTROL_ADD_COMPLETED"));
+			radioBtn.Click();																 
+            System.Threading.Thread.Sleep(_testStepInterval);
+
             browser.FindElement(By.Id("USER_CONTROL_ADD_LATITUDE")).SendKeys(latitude);
             System.Threading.Thread.Sleep(_testStepInterval);
 
@@ -64,6 +68,10 @@ namespace TgimbaSeleniumTests.Tests
             browser.FindElement(By.Id("USER_CONTROL_EDIT_ITEM_NAME")).Clear();	  
             System.Threading.Thread.Sleep(_testStepInterval);
             browser.FindElement(By.Id("USER_CONTROL_EDIT_ITEM_NAME")).SendKeys(bucketListName);
+            System.Threading.Thread.Sleep(_testStepInterval);
+
+			IWebElement radioBtn = browser.FindElement(By.Id("USER_CONTROL_EDIT_COMPLETED"));
+			radioBtn.Click();																 
             System.Threading.Thread.Sleep(_testStepInterval);
 
             IWebElement rankingItemSelect = browser.FindElement(By.Id("USER_CONTROL_EDIT_ITEM_CATEGORY"));
