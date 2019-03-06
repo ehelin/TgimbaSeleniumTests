@@ -7,10 +7,7 @@ namespace TgimbaSeleniumTests.Tests
     {        
         [TestMethod]
         public void RunAllLocalTests()
-        {
-            BaseTest bt = new BaseTest();
-            bt.Setup();
-
+        {				  
 			foreach (string url in Utilities.GetUrls())
 			{
 				CleanUpLocal();

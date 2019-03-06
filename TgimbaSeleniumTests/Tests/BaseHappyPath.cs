@@ -25,16 +25,20 @@ namespace TgimbaSeleniumTests.Tests
             System.Threading.Thread.Sleep(_testStepInterval);							 
 
             LoginTest(browser, "testUser", "testUser23", false);	   
-            System.Threading.Thread.Sleep(_testStepInterval);
-													
-			// tmp...wait for main panel to display
-            System.Threading.Thread.Sleep(_testStepInterval);
+            System.Threading.Thread.Sleep(_testStepInterval);	 
 														
-            //menu tests -------------------------------------------------------
-			Menu(browser);
+            //menu tests -------------------------------------------------------  
+			ClickAction(browser, "btnMainMenu");	 		
+			ClickAction(browser, "hvJsCancelBtn");	
 
+			// show add screen, cancel and reshow add screen
+			ClickAction(browser, "btnMainMenu");				
+			ClickAction(browser, "hvJsAddBucketListItemBtn");				
+			ClickAction(browser, "hvJsAddCancellBtn");			
+												  
+			// main grid tests --------------------------------------------------
 			// add item	  	
-            AddItem(browser, "Bucket item test 1", "Hot", "1.2", "2.1");
+            AddItem(browser, "Bucket item test 1", "Hot", true, "1.2", "2.1");
             System.Threading.Thread.Sleep(_testStepInterval);	  
 
 			// edit item
@@ -43,52 +47,26 @@ namespace TgimbaSeleniumTests.Tests
 				   			
 			// delete item
 			ClickAction(browser, "hvJsFormDeleteBtn");	
-						
+				  
+            //sort ----------------------------------------------------------
+			// show sort menu and return to main bucket list
+			ClickAction(browser, "btnMainMenu");	   				// main menu button
+			ClickAction(browser, "hvJsSortBucketListItemBtn");		// sort button				  
+			ClickAction(browser, "hvJsCancelBtn");					// cancel button		
+															
+            AddSortCategoryTestItems(browser);	   
+			System.Threading.Thread.Sleep(_testStepInterval);
+
+            Sort(browser);			   
+			System.Threading.Thread.Sleep(_testStepInterval);
+
+           // logout and close browser
 			ClickAction(browser, "btnMainMenu");						  
 			ClickAction(browser, "hvJsLogOutBtn");	// logout 	
-
-            ////edit detail tests -----------------------------------------------
-            //AddItemFromEditMenu(browser);
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            //DeleteItem(browser);
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            //DeleteItem(browser);
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            ////search ----------------------------------------------------------
-            //AddItem(browser, "Bucket drive item test 1", "Hot");
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            //AddItem(browser, "Bucket drive item test 2", "Hot");
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            //Search(browser);
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            //DeleteItem(browser);
-            //System.Threading.Thread.Sleep(_testStepInterval);
-
-            ////sort ----------------------------------------------------------
-            //AddSortCategoryTestItems(browser);
-
-            //TestCategoryFilters(browser);
-
-            //Sort(browser);
-            
             Utilities.CloseBrowser(browser);
         }
-
-		protected void Menu(RemoteWebDriver browser) 
-		{				   
-			// show menu	
-			ClickAction(browser, "btnMainMenu");			 
-
-			// cancel button						  
-			ClickAction(browser, "hvJsCancelBtn");		  					
-		}
-
+		
+		// TODO - update once implemented on website(s)	   
         protected void Search(RemoteWebDriver browser)
         {
             browser.FindElement(By.Id("SearchTerm")).SendKeys("drive");
@@ -141,61 +119,6 @@ namespace TgimbaSeleniumTests.Tests
             System.Threading.Thread.Sleep(_testStepInterval);
 
             link = browser.FindElement(By.Id("EditBIButtonSubmit"));
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
-        }
-        protected void AddItemFromEditMenu(RemoteWebDriver browser)
-        {
-            IWebElement link = browser.FindElement(By.Id("blAHrefLink0"));
-            link.Click();
-
-            System.Threading.Thread.Sleep(_testStepInterval);
-
-            link = browser.FindElement(By.Id("DesktopAddButton"));
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
-
-            browser.FindElement(By.Id("BIItemName")).SendKeys("Bucket List Item 2");
-            System.Threading.Thread.Sleep(_testStepInterval);
-
-            IWebElement rankingItemSelect = browser.FindElement(By.Name("rankingItemSelect"));
-            SelectElement selectElement = new SelectElement(rankingItemSelect);
-            selectElement.SelectByText("Cool");
-
-            System.Threading.Thread.Sleep(_testStepInterval);
-
-            link = browser.FindElement(By.Id("AddBIButtonSubmit"));
-            link.Click();
-        }
-        //protected void EditItem(RemoteWebDriver browser)
-        //{
-        //    IWebElement link = browser.FindElement(By.Id("blAHrefLink0"));
-        //    link.Click();
-        //    System.Threading.Thread.Sleep(_testStepInterval);
-
-        //    link = browser.FindElement(By.Id("DesktopEditButton"));
-        //    link.Click();
-        //    System.Threading.Thread.Sleep(_testStepInterval);
-
-        //    browser.FindElement(By.Id("BIItemName")).Clear();
-        //    browser.FindElement(By.Id("BIItemName")).SendKeys("Bucket item test 1 with edited item value");
-        //    System.Threading.Thread.Sleep(_testStepInterval);
-
-        //    IWebElement rankingItemSelect = browser.FindElement(By.Name("rankingItemSelect"));
-        //    SelectElement selectElement = new SelectElement(rankingItemSelect);
-        //    selectElement.SelectByText("Warm");
-        //    System.Threading.Thread.Sleep(_testStepInterval);
-
-        //    link = browser.FindElement(By.Id("EditBIButtonSubmit"));
-        //    link.Click();
-        //}
-        protected void DeleteItem(RemoteWebDriver browser)
-        {
-            IWebElement link = browser.FindElement(By.Id("blAHrefLink0"));
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
-
-            link = browser.FindElement(By.Id("DesktopDeleteButton"));
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval);
         }

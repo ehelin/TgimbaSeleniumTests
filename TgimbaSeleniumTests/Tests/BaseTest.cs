@@ -18,8 +18,7 @@ namespace TgimbaSeleniumTests.Tests
             IWebElement link = browser.FindElement(By.Id(buttonName));
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval);
-		}
-
+		}	
         protected void LogOut(RemoteWebDriver browser)
         {
             IWebElement link = browser.FindElement(By.Id("MenuRequest"));
@@ -29,16 +28,12 @@ namespace TgimbaSeleniumTests.Tests
             link = browser.FindElement(By.Id("LogOut"));
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval);
-        }
-        protected void AddItem(RemoteWebDriver browser, string bucketListName, string category, string latitude, string longitude)
-        {	   						
-			// show add screen, cancel and reshow add screen
-			ClickAction(browser, "btnMainMenu");				
-			ClickAction(browser, "hvJsAddBucketListItemBtn");				
-			ClickAction(browser, "hvJsAddCancellBtn");			   
+        }  
+        protected void AddItem(RemoteWebDriver browser, string bucketListName, string category, bool completed, string latitude, string longitude)
+        {	   									 
 			ClickAction(browser, "btnMainMenu");				
 			ClickAction(browser, "hvJsAddBucketListItemBtn");
-										   
+			 										   
             browser.FindElement(By.Id("USER_CONTROL_ADD_ITEM_NAME")).SendKeys(bucketListName);
             System.Threading.Thread.Sleep(_testStepInterval);
 
@@ -47,9 +42,12 @@ namespace TgimbaSeleniumTests.Tests
             selectElement.SelectByText(category);
             System.Threading.Thread.Sleep(_testStepInterval);
 
-			IWebElement radioBtn = browser.FindElement(By.Id("USER_CONTROL_ADD_COMPLETED"));
-			radioBtn.Click();																 
-            System.Threading.Thread.Sleep(_testStepInterval);
+			if (completed) 
+			{
+				IWebElement radioBtn = browser.FindElement(By.Id("USER_CONTROL_ADD_COMPLETED"));
+				radioBtn.Click();																 
+				System.Threading.Thread.Sleep(_testStepInterval);
+			}
 
             browser.FindElement(By.Id("USER_CONTROL_ADD_LATITUDE")).SendKeys(latitude);
             System.Threading.Thread.Sleep(_testStepInterval);
@@ -60,7 +58,7 @@ namespace TgimbaSeleniumTests.Tests
 			ClickAction(browser, "hvJsAddSubmitBtn");	
         }
         protected void EditItem(RemoteWebDriver browser, string bucketListName, string category, string latitude, string longitude)
-        {	   																   			// show add screen, cancel and reshow add screen
+        {	   																   			
 			ClickAction(browser, "hvJsFormEditBtn");				
 			ClickAction(browser, "hvJsEditCancellBtn");				
 			ClickAction(browser, "hvJsFormEditBtn");			
@@ -90,11 +88,11 @@ namespace TgimbaSeleniumTests.Tests
             System.Threading.Thread.Sleep(_testStepInterval);
 																  
 			ClickAction(browser, "hvJsEditSubmitBtn");	
-        }		 
-        protected void LaunchPageTest(RemoteWebDriver browser, string url)
-        {
-            browser.Navigate().GoToUrl(url);
         }
+		protected void LaunchPageTest(RemoteWebDriver browser, string url)
+		{
+			browser.Navigate().GoToUrl(url);
+		}
 		protected void SetUsernamePassword(RemoteWebDriver browser, string userName, string passWord) 
 		{
             browser.FindElement(By.Id("USER_CONTROL_LOGIN_USERNAME")).SendKeys(userName);
@@ -102,8 +100,6 @@ namespace TgimbaSeleniumTests.Tests
 		}
         protected void LoginTest(RemoteWebDriver browser, string userName, string passWord, bool expectedAlert)
         {
-			//CancelLoginTest(browser, "hvJsCancelBtn");
-
 			SetUsernamePassword(browser, userName, passWord);
 
             System.Threading.Thread.Sleep(_testStepInterval);
@@ -145,34 +141,33 @@ namespace TgimbaSeleniumTests.Tests
         }
         protected void Sort(RemoteWebDriver browser)
         {
-            SelectSort(browser, "SortBtnTitle", false);
-            SelectSort(browser, "SortBtnTitle", true);
+            SelectSort(browser, "hvJsSortItemBtn", false);
+            SelectSort(browser, "hvJsSortItemBtn", true);
 
-            SelectSort(browser, "SortBtnRanking", false);
-            SelectSort(browser, "SortBtnRanking", true);
+            SelectSort(browser, "hvJsSortCreatedBtn", false);
+            SelectSort(browser, "hvJsSortCreatedBtn", true);
 
-            SelectSort(browser, "SortBtnAchieved", false);
-            SelectSort(browser, "SortBtnAchieved", true);
+            SelectSort(browser, "hvJsSortCategoryBtn", false);
+            SelectSort(browser, "hvJsSortCategoryBtn", true);
 
-            SelectSort(browser, "SortBtnEntered", false);
-            SelectSort(browser, "SortBtnEntered", true);
+            SelectSort(browser, "hvJsSortAchievedBtn", false);
+            SelectSort(browser, "hvJsSortAchievedBtn", true);
 
-            SelectSort(browser, "SortBtnClearSort", false);
-            SelectSort(browser, "SortBtnClearCancel", false);
+            SelectSort(browser, "hvJsCancelBtn", false);	
         }
         private void SelectSort(RemoteWebDriver browser, string buttonName, bool desc)
         {
-            IWebElement link = browser.FindElement(By.Id("MenuRequest"));
+            IWebElement link = browser.FindElement(By.Id("btnMainMenu"));
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval);
 
-            link = browser.FindElement(By.Id("SortBucketListItem"));
+            link = browser.FindElement(By.Id("hvJsSortBucketListItemBtn"));
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval);
 
             if (desc)
             {
-                link = browser.FindElement(By.Id("biSortDesccb"));
+                link = browser.FindElement(By.Id("hvJsDescCheckbox"));
                 link.Click();
                 System.Threading.Thread.Sleep(_testStepInterval);
             }
@@ -182,48 +177,30 @@ namespace TgimbaSeleniumTests.Tests
             System.Threading.Thread.Sleep(_testStepInterval);
         }
         protected void AddSortCategoryTestItems(RemoteWebDriver browser)
-        {
-            //AddItem(browser, "Bucket item test 3", "Hot");
-            //System.Threading.Thread.Sleep(_testStepInterval);
+        {	
+			AddItem(browser, "Bucket item test 3", "Hot", true, "3.2", "3.1");
+			System.Threading.Thread.Sleep(_testStepInterval);
 
-            //AddItem(browser, "Bucket item test 1", "Cool");
-            //System.Threading.Thread.Sleep(_testStepInterval);
+			AddItem(browser, "Bucket item test 1", "Cool", false, "1.2", "2.1");
+			System.Threading.Thread.Sleep(_testStepInterval);
 
-            //AddItem(browser, "Bucket item test 7", "Warm");
-            //System.Threading.Thread.Sleep(_testStepInterval);
+			AddItem(browser, "Bucket item test 7", "Warm", true, "7.2", "7.1");
+			System.Threading.Thread.Sleep(_testStepInterval);
 
-            //AddItem(browser, "Bucket item test 5", "Hot");
-            //System.Threading.Thread.Sleep(_testStepInterval);
+			AddItem(browser, "Bucket item test 5", "Hot", false, "5.2", "5.1");
+			System.Threading.Thread.Sleep(_testStepInterval);
 
-            //AddItem(browser, "Bucket item test 4", "Warm");
-            //System.Threading.Thread.Sleep(_testStepInterval);
+			AddItem(browser, "Bucket item test 4", "Warm", true, "4.2", "4.1");
+			System.Threading.Thread.Sleep(_testStepInterval);
 
-            //AddItem(browser, "Bucket item test 2", "Cool");
-            //System.Threading.Thread.Sleep(_testStepInterval);
+			AddItem(browser, "Bucket item test 2", "Cool", false, "2.2", "2.1");
+			System.Threading.Thread.Sleep(_testStepInterval);
 
-            //AddItem(browser, "Bucket item test 6", "Hot");
-            //System.Threading.Thread.Sleep(_testStepInterval);
-        }
-        protected void TestCategoryFilters(RemoteWebDriver browser)
-        {
-            IWebElement link = browser.FindElement(By.Id("DesktopHotFilterButton"));
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
-
-            link = browser.FindElement(By.Id("DesktopWarmFilterButton"));
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
-
-            link = browser.FindElement(By.Id("DesktopColdFilterButton"));
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
-
-            link = browser.FindElement(By.Id("DesktopClearFilterButton"));
-            link.Click();
-            System.Threading.Thread.Sleep(_testStepInterval);
-        }
-
-        #endregion
+			AddItem(browser, "Bucket item test 6", "Hot", true, "6.2", "6.1");
+			System.Threading.Thread.Sleep(_testStepInterval);
+		}
+      
+		#endregion
 
         #region Support 
         
@@ -231,66 +208,7 @@ namespace TgimbaSeleniumTests.Tests
         {
             DeleteTestUser(Constants.TEST_USER, Constants.DB_CONN_LOCAL_HOST_BUCKETLIST);
         }
-        public void Setup()
-        {
-            //try
-            //{
-            //    CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB, false);
-            //}
-            //catch (Exception e)
-            //{
-            //    if (!e.Message.Equals("Cannot drop the database 'BucketList', because it does not exist or you do not have permission."))
-            //        throw e;
-            //}
-            //CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.CREATE_DB, true);
-            //CreateSql(Constants.DB_CONN_LOCAL_HOST_BUCKETLIST, Constants.CREATE_SCHEMA, true);
-            //CreateSql(Constants.DB_CONN_LOCAL_HOST_BUCKETLIST, Constants.CREATE_TABLE, true);
-        }
-        public void TearDown()
-        {
-            //CreateSql(Constants.DB_CONN_LOCAL_HOST_MASTER, Constants.DROP_DB, false);
-        }
-		//protected void CreateSql(string connectionString, string sql, bool errorFatal)
-		//{
-		//    SqlConnection conn = null;
-		//    SqlCommand cmd = null;
-
-		//    try
-		//    {
-		//        conn = new SqlConnection(connectionString);
-		//        cmd = conn.CreateCommand();
-		//        cmd.CommandText = sql;
-		//        cmd.CommandType = System.Data.CommandType.Text;
-
-		//        cmd.Connection.Open();
-
-		//        cmd.ExecuteNonQuery();
-		//    }
-		//   catch (Exception ex)
-		//    {
-		//        if (errorFatal)
-		//            throw ex;
-		//        else
-		//            Console.WriteLine("ERROR" + ex.Message);
-		//    }
-		//    finally
-		//    {
-		//        if (conn != null)
-		//        {
-		//            conn.Close();
-		//            conn.Dispose();
-		//            conn = null;
-		//        }
-
-		//        if (cmd != null)
-		//        {
-		//            cmd.Dispose();
-		//            cmd = null;
-		//        }
-		//    }
-
-		//}
-		protected void DeleteTestUser(string userName, string connectionString)
+    	protected void DeleteTestUser(string userName, string connectionString)
 		{
 			SqlConnection conn = null;
 			SqlCommand cmd = null;
