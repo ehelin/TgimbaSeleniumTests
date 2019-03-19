@@ -20,7 +20,7 @@ namespace TgimbaSeleniumTests
 				//"http://localhost:61755/home/HtmlVanillaJsIndex",	// Vanilla JS
 				//"http://localhost:61755/home/HtmlJQueryIndex",		// JQuery
 				//"http://localhost:62356/",							// Angular 6
-				//"http://localhost:58173/",							// React JS
+				"http://localhost:58173/",							// React JS
 			};
 		}
     }
