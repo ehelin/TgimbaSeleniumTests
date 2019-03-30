@@ -57,7 +57,7 @@ namespace TgimbaSeleniumTests.Tests
 			AddSortCategoryTestItems(browser);	   
 			System.Threading.Thread.Sleep(_testStepInterval);
 
-            Sort(browser);			   
+			Sort(browser);
 			System.Threading.Thread.Sleep(_testStepInterval);
 
 			//search -------------------------------------------------------
@@ -83,7 +83,9 @@ namespace TgimbaSeleniumTests.Tests
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval);
 
-			//search 2 - do not find item
+			//search 2 - do not find item				 			   	   
+            browser.FindElement(By.Id("USER_CONTROL_SEARCH_TEXT_BOX")).Clear();
+            System.Threading.Thread.Sleep(_testStepInterval);
             browser.FindElement(By.Id("USER_CONTROL_SEARCH_TEXT_BOX")).SendKeys("drive");
             System.Threading.Thread.Sleep(_testStepInterval);
 
@@ -95,7 +97,9 @@ namespace TgimbaSeleniumTests.Tests
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval);
 
-			//search 3 - find item and edit it
+			//search 3 - find item and edit it								   
+            browser.FindElement(By.Id("USER_CONTROL_SEARCH_TEXT_BOX")).Clear();
+            System.Threading.Thread.Sleep(_testStepInterval);
             browser.FindElement(By.Id("USER_CONTROL_SEARCH_TEXT_BOX")).SendKeys("Bucket item test 1");
             System.Threading.Thread.Sleep(_testStepInterval);
 
@@ -114,7 +118,9 @@ namespace TgimbaSeleniumTests.Tests
             link.Click();
             System.Threading.Thread.Sleep(_testStepInterval);
 								 
-			//search 4 - find item and delete it
+			//search 4 - find item and delete it			   
+            browser.FindElement(By.Id("USER_CONTROL_SEARCH_TEXT_BOX")).Clear();
+            System.Threading.Thread.Sleep(_testStepInterval);
             browser.FindElement(By.Id("USER_CONTROL_SEARCH_TEXT_BOX")).SendKeys("Bucket item test 2");
             System.Threading.Thread.Sleep(_testStepInterval);
 
