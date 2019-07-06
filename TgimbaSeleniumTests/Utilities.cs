@@ -17,7 +17,8 @@ namespace TgimbaSeleniumTests
 
 		public static List<string> GetUrls() {
 			return new List<string>{
-				"http://localhost:61755/home/HtmlVanillaJsIndex",	// Vanilla JS
+                "https://www.tgimba.com/"
+                //"http://localhost:61755/home/HtmlVanillaJsIndex",	// Vanilla JS
 				//"http://localhost:62356/",							// Angular 6
 				//"http://localhost:50359/",							// React JS
 			};

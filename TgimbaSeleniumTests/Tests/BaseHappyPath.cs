@@ -14,61 +14,64 @@ namespace TgimbaSeleniumTests.Tests
         {
             browser.Manage().Window.Maximize();
 
+            //welcome page -----------------------------------------------------
             LaunchPageTest(browser, url);
             System.Threading.Thread.Sleep(_testStepInterval);
-
-			//login/registration -----------------------------------------------
-			LoginTest(browser, "test", "test", true);
-			System.Threading.Thread.Sleep(_testStepInterval);
-
-			TestRegistration(browser, "testUser", "testUser23", "test@aol.com", false);
-            System.Threading.Thread.Sleep(_testStepInterval);							 
-
-            LoginTest(browser, "testUser", "testUser23", false);	   
+            ClickAction(browser, "htmlVanillaJsLogin");
             System.Threading.Thread.Sleep(_testStepInterval);
 
-			//menu tests -------------------------------------------------------  
-			ClickAction(browser, "btnMainMenu");
-			ClickAction(browser, "hvJsCancelBtn");
+            //login/registration -----------------------------------------------
+            LoginTest(browser, "test", "test", true);
+            System.Threading.Thread.Sleep(_testStepInterval);
 
-			// show add screen, cancel and reshow add screen
-			ClickAction(browser, "btnMainMenu");
-			ClickAction(browser, "hvJsAddBucketListItemBtn");
-			ClickAction(browser, "hvJsAddCancellBtn");
+            TestRegistration(browser, "testUser", "testUser23", "test@aol.com", false);
+            System.Threading.Thread.Sleep(_testStepInterval);
 
-			// main grid tests --------------------------------------------------
-			// add item	  	
-			AddItem(browser, "Bucket item test 1", "Hot", true, "1.2", "2.1");
-			System.Threading.Thread.Sleep(_testStepInterval);
+            LoginTest(browser, "testUser", "testUser23", false);
+            System.Threading.Thread.Sleep(_testStepInterval);
 
-			// edit item
-			EditItem(browser, "Updated Bucket item test 1", "Warm", "3.4", "10.9");
-			System.Threading.Thread.Sleep(_testStepInterval);
+            //menu tests -------------------------------------------------------  
+            ClickAction(browser, "btnMainMenu");
+            ClickAction(browser, "hvJsCancelBtn");
 
-			// delete item
-			ClickAction(browser, "hvJsFormDeleteBtn");
+            // show add screen, cancel and reshow add screen
+            ClickAction(browser, "btnMainMenu");
+            ClickAction(browser, "hvJsAddBucketListItemBtn");
+            ClickAction(browser, "hvJsAddCancellBtn");
 
-			//sort ----------------------------------------------------------
-			// show sort menu and return to main bucket list
-			ClickAction(browser, "btnMainMenu");                    // main menu button
-			ClickAction(browser, "hvJsSortBucketListItemBtn");      // sort button				  
-			ClickAction(browser, "hvJsCancelBtn");                  // cancel button		
+            // main grid tests --------------------------------------------------
+            // add item	  	
+            AddItem(browser, "Bucket item test 1", "Hot", true, "1.2", "2.1");
+            System.Threading.Thread.Sleep(_testStepInterval);
 
-			AddSortCategoryTestItems(browser);	   
-			System.Threading.Thread.Sleep(_testStepInterval);
+            // edit item
+            EditItem(browser, "Updated Bucket item test 1", "Warm", "3.4", "10.9");
+            System.Threading.Thread.Sleep(_testStepInterval);
 
-			Sort(browser);
-			System.Threading.Thread.Sleep(_testStepInterval);
+            // delete item
+            ClickAction(browser, "hvJsFormDeleteBtn");
 
-			//search -------------------------------------------------------
-			Search(browser);
+            //sort ----------------------------------------------------------
+            // show sort menu and return to main bucket list
+            ClickAction(browser, "btnMainMenu");                    // main menu button
+            ClickAction(browser, "hvJsSortBucketListItemBtn");      // sort button				  
+            ClickAction(browser, "hvJsCancelBtn");                  // cancel button		
 
-           // logout and close browser
-			ClickAction(browser, "btnMainMenu");						  
-			ClickAction(browser, "hvJsLogOutBtn");	// logout 	
+            AddSortCategoryTestItems(browser);
+            System.Threading.Thread.Sleep(_testStepInterval);
+
+            Sort(browser);
+            System.Threading.Thread.Sleep(_testStepInterval);
+
+            //search -------------------------------------------------------
+            Search(browser);
+
+            // logout and close browser
+            ClickAction(browser, "btnMainMenu");
+            ClickAction(browser, "hvJsLogOutBtn");  // logout 	
             Utilities.CloseBrowser(browser);
         }
-		   
+
         protected void Search(RemoteWebDriver browser)
         {
 			//search 1 - find item
