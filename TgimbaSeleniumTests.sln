@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgimbaSeleniumTests", "TgimbaSeleniumTests\TgimbaSeleniumTests.csproj", "{4C099B90-FDB7-4B0D-A299-4D041B683421}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API-IntegrationTests", "API-IntegrationTests\API-IntegrationTests.csproj", "{6BCD9868-B72D-4B35-896D-C9505EDEE180}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{8B09063A-FEEB-4452-B6B5-8D02E5D0B33F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,22 @@ Global
 		{4C099B90-FDB7-4B0D-A299-4D041B683421}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4C099B90-FDB7-4B0D-A299-4D041B683421}.Release|x86.ActiveCfg = Release|x86
 		{4C099B90-FDB7-4B0D-A299-4D041B683421}.Release|x86.Build.0 = Release|x86
+		{6BCD9868-B72D-4B35-896D-C9505EDEE180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BCD9868-B72D-4B35-896D-C9505EDEE180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BCD9868-B72D-4B35-896D-C9505EDEE180}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6BCD9868-B72D-4B35-896D-C9505EDEE180}.Debug|x86.Build.0 = Debug|Any CPU
+		{6BCD9868-B72D-4B35-896D-C9505EDEE180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BCD9868-B72D-4B35-896D-C9505EDEE180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BCD9868-B72D-4B35-896D-C9505EDEE180}.Release|x86.ActiveCfg = Release|Any CPU
+		{6BCD9868-B72D-4B35-896D-C9505EDEE180}.Release|x86.Build.0 = Release|Any CPU
+		{8B09063A-FEEB-4452-B6B5-8D02E5D0B33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B09063A-FEEB-4452-B6B5-8D02E5D0B33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B09063A-FEEB-4452-B6B5-8D02E5D0B33F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B09063A-FEEB-4452-B6B5-8D02E5D0B33F}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B09063A-FEEB-4452-B6B5-8D02E5D0B33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B09063A-FEEB-4452-B6B5-8D02E5D0B33F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B09063A-FEEB-4452-B6B5-8D02E5D0B33F}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B09063A-FEEB-4452-B6B5-8D02E5D0B33F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

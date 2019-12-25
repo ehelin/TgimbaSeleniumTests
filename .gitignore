@@ -189,3 +189,6 @@ _Pvt_Extensions/
 ModelManifest.xml
 /browserRunners
 /.vs/TgimbaSeleniumTests/v15/Server/sqlite3
+/.vs/TgimbaSeleniumTests
+/dddddd
+/Shared/Credentials.cs
