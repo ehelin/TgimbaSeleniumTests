@@ -4,8 +4,7 @@ Selenium Automated GUI and API Tests for The Globe in My Bucket Application (TGI
 This project was created to test TGIMBA.  It includes User Interface (UI) and Application Programmatic Interface (API) tests to verify functionality.
 
 *******
-NOTE:  This project is for the .NET Framework version of TGIMBA.  The application has been updated to .NET Core and is available 
-<a href="https://github.com/ehelin/TgimbaNetCore/">here</a>.  UI/API tests are included within the .NET Core version of TGIMBA
+NOTE:  This project is for the .NET Framework version of TGIMBA.  The application has been updated to .NET Core (tests included within solution) and is available <a href="https://github.com/ehelin/TgimbaNetCore/">here</a>. 
 *******
 
 ## Related Projects/Items
@@ -17,6 +16,7 @@ These items are also related to this project.
 
 * These blog posts are related - 
 <a href="https://erichelin.wordpress.com/2016/03/09/tgimba/">TGIMBA introduction</a> and various test integrations:
+<br />
 -<a href="https://erichelin.wordpress.com/2018/11/02/tgimba-net-core-upgrade-login-page-selenium-integration-test/">Test Integration 1</a>
 <br />
 -<a href="https://erichelin.wordpress.com/2018/11/30/tgimba-net-core-upgrade-registration-page-vanilla-js-jquery-js-angular-6-type-script-and-react-redux-js-w-selenium-test/">Test Integration 2</a>
