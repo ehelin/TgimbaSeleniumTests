@@ -1,5 +1,5 @@
 # Full Stack Developer .Net
-Selenium Automated GUI and API Tests for The Globe in My Bucket Application (TGIMBA)
+Selenium Automated GUI and API Tests for The Globe in My BucketList Application (TGIMBA)
 
 This project was created to test TGIMBA.  It includes User Interface (UI) and Application Programmatic Interface (API) tests to verify functionality.
 
